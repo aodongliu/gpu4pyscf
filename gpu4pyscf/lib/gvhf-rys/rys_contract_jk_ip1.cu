@@ -1701,9 +1701,8 @@ int RYS_build_jk_ip1(double *vj, double *vk, double *dm, int n_dm, int nao, int 
         jk.sr_factor = 1;
     }
 
-    cudaDeviceProp prop;
-    cudaGetDeviceProperties(&prop, 0);
-    int workers = prop.multiProcessorCount;
+    int workers;
+    cudaDeviceGetAttribute(&workers, cudaDevAttrMultiProcessorCount, 0);
     int *head = (int *)(pool + workers * QUEUE_DEPTH);
     cudaMemset(head, 0, sizeof(int));
 
@@ -1803,9 +1802,8 @@ int RYS_per_atom_jk_ip1(double *ejk, double j_factor, double k_factor,
         jk.sr_factor = 1;
     }
 
-    cudaDeviceProp prop;
-    cudaGetDeviceProperties(&prop, 0);
-    int workers = prop.multiProcessorCount;
+    int workers;
+    cudaDeviceGetAttribute(&workers, cudaDevAttrMultiProcessorCount, 0);
     int *head = (int *)(pool + workers * QUEUE_DEPTH);
     cudaMemset(head, 0, sizeof(int));
 
@@ -1899,9 +1897,8 @@ int RYS_per_atom_jk_ip1_multidm(double *ejk, double *j_factor, double *j_factor_
         jk.sr_factor = 1;
     }
 
-    cudaDeviceProp prop;
-    cudaGetDeviceProperties(&prop, 0);
-    int workers = prop.multiProcessorCount;
+    int workers;
+    cudaDeviceGetAttribute(&workers, cudaDevAttrMultiProcessorCount, 0);
     int *head = (int *)(pool + workers * QUEUE_DEPTH);
     cudaMemset(head, 0, n_dm*sizeof(int));
 
@@ -2006,9 +2003,8 @@ int RYS_per_atom_jk_ip1_sum(double *ejk, double *j_factor, double *j_factor_cpu,
         jk.sr_factor = 1;
     }
 
-    cudaDeviceProp prop;
-    cudaGetDeviceProperties(&prop, 0);
-    int workers = prop.multiProcessorCount;
+    int workers;
+    cudaDeviceGetAttribute(&workers, cudaDevAttrMultiProcessorCount, 0);
     int *head = (int *)(pool + workers * QUEUE_DEPTH);
     cudaMemset(head, 0, sizeof(int));
 

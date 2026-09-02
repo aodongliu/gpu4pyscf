@@ -386,9 +386,8 @@ int RYS_build_jk(double *vj, double *vk, double *dm, int n_dm, int nao,
         NULL, NULL, dm_cond, cutoff,
         ntiles_i, ntiles_j, ntiles_k, ntiles_l};
 
-    cudaDeviceProp prop;
-    cudaGetDeviceProperties(&prop, 0);
-    int workers = prop.multiProcessorCount;
+    int workers;
+    cudaDeviceGetAttribute(&workers, cudaDevAttrMultiProcessorCount, 0);
     int *head = (int *)(pool + workers * QUEUE_DEPTH);
     cudaMemset(head, 0, sizeof(int)*3);
 
