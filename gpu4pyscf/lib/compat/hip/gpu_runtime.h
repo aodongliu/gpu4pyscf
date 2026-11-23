@@ -118,6 +118,8 @@ static inline hipError_t cudaHostGetDevicePointer(T** dev_ptr, void* host_ptr,
 #define cudaGetDeviceCount                          hipGetDeviceCount
 #define cudaGetDeviceProperties                     hipGetDeviceProperties
 #define cudaDeviceProp                              hipDeviceProp_t
+#define cudaDeviceGetAttribute                      hipDeviceGetAttribute
+#define cudaDevAttrMultiProcessorCount              hipDeviceAttributeMultiprocessorCount
 
 /* --- kernel function attributes (e.g. dynamic shared-memory opt-in) --- */
 #define cudaFuncAttributes                          hipFuncAttributes
