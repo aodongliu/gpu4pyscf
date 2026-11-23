@@ -251,6 +251,14 @@ static inline cudaError_t cudaGetDeviceProperties(cudaDeviceProp* prop, int /*de
   return cudaSuccess;
 }
 
+enum cudaDeviceAttr { cudaDevAttrMultiProcessorCount };
+
+static inline cudaError_t cudaDeviceGetAttribute(int* value, cudaDeviceAttr /*attr*/, int /*device*/) {
+  *value = static_cast<int>(
+    sycl_get_queue()->get_device().get_info<sycl::info::device::max_compute_units>());
+  return cudaSuccess;
+}
+
 // --- CUDA-compat memory helpers (use current thread's queue) ---
 
 static inline void cudaMalloc(void** ptr, size_t size) {
